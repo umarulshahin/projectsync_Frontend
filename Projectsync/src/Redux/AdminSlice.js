@@ -12,11 +12,11 @@ const AdminSlice = createSlice({
         addAdmindata : (state, action)=>{
             state.admindata = action.payload
         },
-        addLogout : (state, action)=>{
+        addAdmin_Logout : (state, action)=>{
             state.admindata = null
         }
     }
 })
 
-export const {addAdmindata,addLogout} = AdminSlice.actions;
+export const {addAdmindata,addAdmin_Logout} = AdminSlice.actions;
 export default AdminSlice.reducer;

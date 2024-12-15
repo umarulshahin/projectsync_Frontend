@@ -5,20 +5,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { LogoutIcon } from "@heroicons/react/outline";
 import Cookies from 'js-cookie'
 import { Link, useNavigate } from "react-router-dom";
-import { addAdmin_Logout } from "../Redux/AdminSlice";
+import { addLogout, addUserdata } from "../Redux/UserSlice";
 
-const Admin_Header= () => {
+const User_Header= () => {
 
   const [toggel, settoggel] = useState(false);
-  const user = useSelector((state) => state.admindata.admindata);
+  const user = useSelector((state) => state.userdata.userdata);
   const { username } = user;
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleLogout = () => {
 
-    Cookies.remove('adminToken')
-    dispatch(addAdmin_Logout(null))
+    Cookies.remove('userToken')
+    dispatch(addLogout(null))
     navigate('/')
 
   };
@@ -27,7 +27,6 @@ const Admin_Header= () => {
     <div className="fixed flex  justify-between p-6 bg-gradient-to-l border border-b-2 bg-gray-300/90 shadow-xl h-20 w-full">
       <div className="flex items-center gap-8  ">
        <Link to='/adminhome'><img src={projectsync} className="h-20" alt="logo" /></Link> 
-        <span className=" text-2xl font-medium">Admin Dashboard</span>
       </div>
       <div
         className="flex items-center gap-2 pr-6 md:pr-10 cursor-pointer "
@@ -54,4 +53,4 @@ const Admin_Header= () => {
   );
 };
 
-export default Admin_Header;
+export default User_Header;
