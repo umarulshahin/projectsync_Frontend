@@ -2,12 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 
-const AmdminSlice = createSlice({
-    name : "Admindata",
-    initailState :{
-        Admindata : null
+const AdminSlice = createSlice({
+    name:"Admindata",
+    
+    initialState:{
+        admindata : null,
     },
-    reducers : {
+    reducers:{
         addAdmindata : (state, action)=>{
             state.admindata = action.payload
         },
@@ -17,5 +18,5 @@ const AmdminSlice = createSlice({
     }
 })
 
-export const {addAdmindata,addLogout} = AmdminSlice.actions;
-export default AmdminSlice.reducers;
+export const {addAdmindata,addLogout} = AdminSlice.actions;
+export default AdminSlice.reducer;

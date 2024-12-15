@@ -11,6 +11,7 @@ import Admin_Dashboard from "./Pages/Admin_Dashboard";
 import PrivetRoute from "./PrivetRoute";
 import AuthPrivetRoute from "./AuthPrivetRoute";
 import ErrorPage from "./Components/ErrorPage";
+import AdminPrivetRoute from "./AdminPrivetRoute";
 
 
 function App() {
@@ -23,9 +24,11 @@ function App() {
             <Routes>
               <Route path="/" element={<AuthPrivetRoute><Signin /></AuthPrivetRoute> }/>
               <Route path="/signup" element={<AuthPrivetRoute><Signup /></AuthPrivetRoute >} />
-              <Route path="/userhome" element={<PrivetRoute><User_Dashboard /></PrivetRoute>}/>
+              <Route path="/userhome" element={<PrivetRoute><User_Dashboard /></PrivetRoute>}>
+              
+              </Route>
 
-              <Route path="/adminhome" element={<Admin_Dashboard />}>
+              <Route path="/adminhome" element={<AdminPrivetRoute><Admin_Dashboard /></AdminPrivetRoute> }>
                
               </Route>
              <Route path="*" element={<ErrorPage />} />
