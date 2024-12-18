@@ -7,13 +7,17 @@ import { appStore, persist } from "./Redux/Store";
 import { Provider } from "react-redux";
 import { Toaster, toast } from "sonner";
 import User_Dashboard from "./Pages/User_Dashboard";
-import Admin_Dashboard from "./Pages/Admin_Dashboard";
 import PrivetRoute from "./PrivetRoute";
 import AuthPrivetRoute from "./AuthPrivetRoute";
 import ErrorPage from "./Components/ErrorPage";
 import AdminPrivetRoute from "./AdminPrivetRoute";
+import Admin_Layout from "./Pages/Admin_Layout";
+import Admin_Dashboard from "./Components/Admin_Dashboard";
+import { lazy, Suspense } from "react";
+import Spinner from "./Components/spinner.jsx";
 
 
+const User = lazy(() => import("./Components/User.jsx"))
 function App() {
   return (
     <>
@@ -28,9 +32,12 @@ function App() {
               
               </Route>
 
-              <Route path="/adminhome" element={<AdminPrivetRoute><Admin_Dashboard /></AdminPrivetRoute> }>
-               
+              <Route path="/adminhome" element={<AdminPrivetRoute><Admin_Layout/></AdminPrivetRoute> }>
+               <Route index element={<Admin_Dashboard />}/>
+               <Route path="/adminhome/user" element={<Suspense fallback={<Spinner />} ><User /> </ Suspense>}/> 
+
               </Route>
+
              <Route path="*" element={<ErrorPage />} />
 
             </Routes>

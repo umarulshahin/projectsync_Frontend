@@ -5,13 +5,13 @@ const ErrorPage = () => {
   const navigate = useNavigate();
 
   const redirectToHome = () => {
-    navigate('/'); // Change '/' to your desired home route
+    navigate(-1); // Change '/' to your desired home route
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-stone-300">
-      <h1 className="text-4xl font-bold text-red-500 mb-4">Something Went Wrong</h1>
-      <p className="text-lg text-gray-700 mb-8">
+    <div className="flex flex-col items-center justify-center h-screen bg-orange-200/80">
+      <h1 className="md:text-4xl font-bold text-red-500 mb-4">Something Went Wrong</h1>
+      <p className="md:text-lg text-gray-700 mb-8 text-center">
         We're sorry, but something unexpected happened. Please try again later.
       </p>
       <button
