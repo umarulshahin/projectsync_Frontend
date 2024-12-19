@@ -8,10 +8,29 @@ const User = () => {
   const [isDropdownOpen,setIsDropdownOpen] = useState(null)
   const [Modal , setModal] = useState(null)
   const [UpdateUser, setUpdateUser] = useState(null)
-  const User_list = useSelector((state) => state.admindata.user_list);
-  console.log(User_list, "user data");
+  const [UserList , setUserList] = useState(null)
+  const Users = useSelector((state) => state.admindata.user_list);
+
   const { GetUser } = useAdmin();
 
+  useEffect(()=>{
+    
+    const filterUsers = Users.filter((user)=>{
+        switch (activeTab){
+            case "all":
+                return true
+            case "Active":
+                return user.is_active === true
+            case "Blocked":
+                return user.is_active === false
+            default: 
+              return false
+        }
+    })
+    setUserList(filterUsers)
+
+     
+  },[Users,activeTab])
 
   useEffect(() => {
     // Getting the User list api Call
@@ -103,8 +122,8 @@ const User = () => {
                 </tr>
               </thead>
               <tbody>
-                {User_list ? (
-                  User_list.map((data, index) => (
+                {UserList ? (
+                  UserList.map((data, index) => (
                     <tr
                       key={data.id}
                       className="relative hover:bg-gray-200 font-semibold transition-colors"
