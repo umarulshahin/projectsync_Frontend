@@ -3,20 +3,21 @@ import { AiOutlineUserDelete, AiOutlineUserAdd } from "react-icons/ai";
 import { UserBlockUnblock_URL } from "../Utils/Constance";
 import useAdmin from "../Hooks/useAdmin";
 
-const BlockUnblock = ({ userdata, isModal,isopen }) => {
+const BlockUnblock = ({ userdata, isModal,isOpen }) => {
 
   const {UserManagement} = useAdmin()
  
-  if (!isopen) return null;
+  if (!isOpen) return null;
   const handleConfirm =()=>{
 
-    UserManagement(UserBlockUnblock_URL,10)
+    UserManagement(UserBlockUnblock_URL,userdata.id)
     isModal(null)
   }
-  console.log(userdata,'userdata')
+
+  
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-1/3">
+      <div className="bg-white rounded-lg shadow-lg p-6 w-2/3 md:w-1/3">
         {/* Icon */}
         <div className="flex justify-center mb-4">
           {userdata.is_active ? (
