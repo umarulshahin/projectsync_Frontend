@@ -24,7 +24,7 @@ const refreshToken = async () => {
     }
 
     // Request a new access token using the refresh token
-    const response = await axios.post(`${Backend_base}/Api/token/refresh/`, {
+    const response = await axios.post(`${Backend_base}token/refresh/`, {
         refresh: token.refresh
     });
 

@@ -19,15 +19,13 @@ const User = () => {
   }, []);
 
   const handlePermissionChange = (data)=>{
-    console.log(data)
-    console.log('permission working')
+  
     setUpdateUser(data)
     setModal('permission')
   }
 
   const handleBlockUnblock = (data)=>{
-    console.log(data)
-    console.log('block unblock working')
+  
     setUpdateUser(data)
     setModal('blockunblock')
   }
@@ -193,8 +191,9 @@ const User = () => {
               </tbody>
             </table>
             {Modal && <ModalManager
-               modal = {Modal}
+               modaltype = {Modal}
                userdata = {UpdateUser}
+               isModal = {setModal}
              />}
           </div>
         </div>

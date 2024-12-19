@@ -1,11 +1,15 @@
 import React from 'react'
+import BlockUnblock from './BlockUnblock'
 
-const ModalManager = (modal,userdata) => {
-    console.log(userdata,'userdata')
-    console.log(modal,'modal')
-  return (
-    <div>ModalManager</div>
-  )
+const ModalManager = ({userdata,modaltype,isModal}) => {
+   
+  switch (modaltype){
+    case 'blockunblock':
+        return (< BlockUnblock userdata={userdata} isModal={isModal} isopen={modaltype === 'blockunblock'} />)
+    
+    default: 
+       return null
+  }
 }
 
 export default ModalManager

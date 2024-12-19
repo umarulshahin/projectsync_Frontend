@@ -5,3 +5,5 @@ export const Signup_URL = Backend_base+"signup/";
 export const Signin_URL = Backend_base+"signin/";
 
 export const GetUsers_URL = Backend_base+"getusers/";
+
+export const UserBlockUnblock_URL = Backend_base+"userblockunblock/";
