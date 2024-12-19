@@ -24,16 +24,16 @@ const User_Header= () => {
   };
 
   return (
-    <div className="fixed flex  justify-between p-6 bg-gradient-to-l border border-b-2 bg-gray-300/90 shadow-xl h-20 w-full">
+    <div className="fixed flex  justify-between p-6 bg-gradient-to-l  bg-black shadow-xl h-20 w-full">
       <div className="flex items-center gap-8  ">
-       <Link to='/adminhome'><img src={projectsync} className="h-20" alt="logo" /></Link> 
+       <Link to='/userhome'><img src={projectsync} className="h-20" alt="logo" /></Link> 
       </div>
       <div
         className="flex items-center gap-2 pr-6 md:pr-10 cursor-pointer "
         onClick={() => settoggel(!toggel)}
       >
         <img src={profile} alt="" className="h-10 w-10 rounded-full" />
-        <span className="text-lg font-semibold text-gray-900">{username}</span>
+        <span className="text-lg font-semibold text-white">{username}</span>
       </div>
       {toggel && (
         <div

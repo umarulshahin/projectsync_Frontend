@@ -4,7 +4,7 @@ import profile from "../assets/profile_img.png";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutIcon } from "@heroicons/react/outline";
 import Cookies from 'js-cookie'
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { addAdmin_Logout } from "../Redux/AdminSlice";
 
 const Admin_Header= () => {
@@ -14,6 +14,7 @@ const Admin_Header= () => {
   const { username } = user;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     Cookies.remove('adminToken');
@@ -24,7 +25,9 @@ const Admin_Header= () => {
   return (
     <header className="fixed top-0 right-0 left-16 md:left-48 bg-orange-200/80 border-b border-gray-400">
       <div className="flex justify-between items-center h-20 px-6">
-        <h1 className="text-2xl font-medium">Dashboard</h1>
+        {location.pathname === '/adminhome' && (<h1 className="text-2xl font-medium">Dashboard</h1>)}
+        {location.pathname === '/adminhome/user' && (<h1 className="text-2xl font-medium">Users</h1>)}
+
         
         <div className="relative">
           <div

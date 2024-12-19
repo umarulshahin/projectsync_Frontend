@@ -7,7 +7,7 @@ import { toast } from 'sonner'
 
 const useAdmin = () => {
     const dispatch = useDispatch()
-  const GetUser = async () => {
+  const GetUsers = async () => {
     try{
        const response =await AdminAxios.get(GetUsers_URL,{
         headers:{
@@ -37,7 +37,7 @@ const useAdmin = () => {
       if (response.status === 200){
         console.log(response.data,'usermanagement')
         toast.success(response.data.message)
-        GetUser()
+        GetUsers()
         
       }
 
@@ -46,7 +46,7 @@ const useAdmin = () => {
       toast.error("Something went wrong. Please try again later.")
     }
   }
-  return {GetUser,UserManagement}
+  return {GetUsers,UserManagement}
 }
 
 export default useAdmin

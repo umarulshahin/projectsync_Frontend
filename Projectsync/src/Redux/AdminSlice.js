@@ -18,6 +18,7 @@ const AdminSlice = createSlice({
         },
         addAdmin_Logout : (state, action)=>{
             state.admindata = null
+            state.user_list = null
         },
     }
 })

@@ -17,7 +17,7 @@ const PermissionModal = ({  userdata, isModal, isOpen }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-1/3">
+      <div className="bg-white rounded-lg shadow-lg p-6 w-2/3 md:w-1/3">
         {/* Icon */}
         <div className="flex justify-center mb-4">
           { userdata.is_permission ? (

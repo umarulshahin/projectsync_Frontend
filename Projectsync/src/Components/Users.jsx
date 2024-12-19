@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import useAdmin from "../Hooks/useAdmin";
 import ModalManager from "../Modals/ModalManager";
 
-const User = () => {
+const Users = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [isDropdownOpen,setIsDropdownOpen] = useState(null)
   const [Modal , setModal] = useState(null)
@@ -11,7 +11,7 @@ const User = () => {
   const [UserList , setUserList] = useState(null)
   const Users = useSelector((state) => state.admindata.user_list);
 
-  const { GetUser } = useAdmin();
+  const { GetUsers } = useAdmin();
 
   useEffect(()=>{
     
@@ -34,7 +34,7 @@ const User = () => {
 
   useEffect(() => {
     // Getting the User list api Call
-    GetUser();
+    GetUsers();
   }, []);
 
   const handlePermissionChange = (data)=>{
@@ -221,4 +221,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Users;

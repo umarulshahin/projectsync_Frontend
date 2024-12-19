@@ -10,7 +10,7 @@ const Sidebar = () => {
         <img className='h-16 w-auto' src={logo} alt="projectsync" />
       </div>
       
-      <nav className="mt-8 w-full px-3">
+      <nav className="mt-8 w-full px-3 space-y-2">
       <NavLink
           to="/adminhome"
           end
