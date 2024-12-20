@@ -7,6 +7,7 @@ const UserSlice = createSlice({
     initialState:{
         userdata:null,
         userDetails:null,
+        employees:null
         
     },
 
@@ -17,13 +18,17 @@ const UserSlice = createSlice({
         addUserDetails:(state,action)=>{
             state.userDetails=action.payload
         },
+        addEmployees:(state,action)=>{
+                state.employees = action.payload
+        },
         addLogout:(state,action)=>{
              state.userdata = null
              state.userDetails = null
-        }
+        },
+
     }
 })
 
-export const {addUserdata,addLogout,addUserDetails} = UserSlice.actions;
+export const {addUserdata,addLogout,addUserDetails,addEmployees} = UserSlice.actions;
 
 export default UserSlice.reducer

@@ -20,7 +20,7 @@ const User_Dashboard = () => {
      setModal('addproject')
   }
   return (
-    <div className="text-black min-h-screen bg-stone-300">
+    <div className="text-black bg-stone-300 min-h-screen">
       {is_permission && (
         <div className="flex p-10 justify-end ">
           {" "}
