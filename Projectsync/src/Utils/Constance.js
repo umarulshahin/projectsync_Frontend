@@ -12,6 +12,8 @@ export const UserPermission_URl = Backend_base+"userpermission/";
 
 export const Get_User_URL = Backend_base+"get_user/";
 
-export const CreateProject_URL = Backend_base+"createproject/"
+export const CreateProject_URL = Backend_base+"createproject/";
 
-export const GetEmployee_URL = Backend_base+"getemployee/"
+export const GetEmployee_URL = Backend_base+"getemployee/";
+
+export const DeleteProject_URL = Backend_base+"deleteproject/";

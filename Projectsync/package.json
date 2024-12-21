@@ -10,13 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@heroicons/react": "^1.0.6",
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
     "formik": "^2.4.6",
     "heroicons": "^2.2.0",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.469.0",
     "react": "^18.3.1",
     "react-datepicker": "^7.5.0",
     "react-dom": "^18.3.1",

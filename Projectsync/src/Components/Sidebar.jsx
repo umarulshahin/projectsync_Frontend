@@ -1,7 +1,8 @@
 import React from 'react';
-import { UserGroupIcon, ViewBoardsIcon,HomeIcon } from '@heroicons/react/outline';
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/projectsync.png';
+import { UserGroupIcon, ViewColumnsIcon, HomeIcon } from "@heroicons/react/24/outline";
+
 
 const Sidebar = () => {
   return (
@@ -41,7 +42,7 @@ const Sidebar = () => {
             ${isActive ? 'bg-white text-orange-600 rounded-full' : ''}
           `}
         >
-          <ViewBoardsIcon className="w-6 h-6" />
+          <ViewColumnsIcon className="w-6 h-6" />
           <span className="hidden md:block">Projects</span>
         </NavLink>
       </nav>

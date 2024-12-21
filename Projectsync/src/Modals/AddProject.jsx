@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
-import { XIcon } from "@heroicons/react/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import useUser from "../Hooks/useUser";
@@ -92,7 +92,7 @@ const AddProject = ({ isModal, isOpen }) => {
                 onClick={() => isModal(null)}
                 className="absolute right-4 top-4 text-gray-400 hover:text-gray-500"
               >
-                <XIcon className="h-5 w-5" />
+                <XMarkIcon className="h-5 w-5" />
               </button>
 
               <h2 className="text-2xl font-semibold text-gray-800 mb-6">
