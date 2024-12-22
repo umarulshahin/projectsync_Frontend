@@ -3,6 +3,7 @@ import BlockUnblock from './BlockUnblock'
 import PermissionModal from './PermissionModal'
 import AddProject from './AddProject'
 import DeleteProject from './DeleteProject'
+import ProjectStatusModal from './ProjectStatusModal'
 
 const ModalManager = ({userdata,modaltype,isModal}) => {
    console.log('yes working modal manager')
@@ -17,7 +18,10 @@ const ModalManager = ({userdata,modaltype,isModal}) => {
         return ( <AddProject isModal={isModal} isOpen={modaltype === 'addproject'} />)
 
     case 'deleteproject':
-        return (<DeleteProject userdata={userdata} isModal={isModal} isOpen={modaltype === 'deleteproject'} />)
+        return (<DeleteProject projectdata={userdata} isModal={isModal} isOpen={modaltype === 'deleteproject'} />)
+
+    case "statusmanagement":
+        return (<ProjectStatusModal projectdata={userdata} isModal={isModal} isOpen={modaltype === 'statusmanagement'} />)
     
     default: 
        return null

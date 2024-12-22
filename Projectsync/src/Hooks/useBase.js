@@ -3,11 +3,14 @@ import { toast } from 'sonner';
 import BaseAxios from '../Axios/BaseAxios';
 import { DeleteProject_URL } from '../Utils/Constance';
 import useUser from './useUser';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addDeleteProject } from '../Redux/UserSlice';
 
 const useBase = () => {
    const {Get_User}=useUser()
    const user = useSelector((status)=>status.userdata.userdata)
+   const dispatch = useDispatch()
+
 
     const Delete_Project= async (role=null,data)=>{
         console.log(data)   
@@ -25,7 +28,7 @@ const useBase = () => {
                 if(role === "admin"){
 
                 }else{
-                     Get_User(user.user_id)
+                    dispatch(addDeleteProject(data))
                 }
 
               }

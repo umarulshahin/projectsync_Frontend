@@ -25,12 +25,17 @@ const User_Dashboard = () => {
     setModal("addproject");
   };
 
-  const handleDeleteProject =(value)=>{
-    console.log(value,'delete project')
-    setModal('deleteproject')
+  const handleDeleteProject = (value) => {
+    console.log(value, "delete project");
+    setModal("deleteproject");
+    setUserdata(value);
+  };
+
+  const handleStatusManagement = (value) =>{
+    console.log(value, "status management");
+    setModal('statusmanagement')
     setUserdata(value)
   }
-
   return (
     <div className="text-black bg-stone-300 min-h-screen">
       {is_permission && (
@@ -136,7 +141,21 @@ const User_Dashboard = () => {
                                 </button>
                               )}
                             </Menu.Item>
-
+                            <Menu.Item>
+                              {({ active }) => (
+                                <button
+                                  onClick={()=> handleStatusManagement({id:project.id,status:project.status,title:project.title})}
+                                  className={`${
+                                    active
+                                      ? "bg-gray-50 text-gray-900"
+                                      : "text-gray-700"
+                                  } flex items-center w-full px-4 py-2 hover:bg-stone-300 text-sm`}
+                                >
+                                  <RotateCw className="h-4 w-4 mr-3  text-gray-500" />{" "}
+                                  Change Status
+                                </button>
+                              )}
+                            </Menu.Item>
                             <div className="py-1">
                               {is_permission && (
                                 <>
@@ -157,7 +176,12 @@ const User_Dashboard = () => {
                                   <Menu.Item>
                                     {({ active }) => (
                                       <button
-                                      onClick={()=>handleDeleteProject({id:project.id,projectName:project.title})}
+                                        onClick={() =>
+                                          handleDeleteProject({
+                                            id: project.id,
+                                            projectName: project.title,
+                                          })
+                                        }
                                         className={`${
                                           active
                                             ? "bg-red-50 text-red-900"
@@ -172,7 +196,6 @@ const User_Dashboard = () => {
                                 </>
                               )}
                             </div>
-                        
                           </div>
                         </Menu.Items>
                       </Menu>
@@ -194,7 +217,11 @@ const User_Dashboard = () => {
         </div>
       </div>
       {Modal && (
-        <ModalManager userdata={userdata} modaltype={Modal} isModal={setModal} />
+        <ModalManager
+          userdata={userdata}
+          modaltype={Modal}
+          isModal={setModal}
+        />
       )}
     </div>
   );

@@ -5,8 +5,9 @@ import {
   CreateProject_URL,
   Get_User_URL,
   GetEmployee_URL,
+  ProjctStatus_URL,
 } from "../Utils/Constance";
-import { addEmployees, addProjects, addUserDetails } from "../Redux/UserSlice";
+import { addEmployees, addProjects, addStatusManagement, addUserDetails } from "../Redux/UserSlice";
 import { toast } from "sonner";
 
 const useUser = () => {
@@ -96,7 +97,32 @@ const useUser = () => {
       }
     }
   };
-  return { Get_User, CreateProject, Get_Employee };
+
+  const UpdateProject = async(data)=>{
+     try{
+
+      const response = await UserAxios.put(ProjctStatus_URL,data,{
+        headers:{
+          "content-Type" : "application/json"
+        }
+      })
+      if(response.status === 200){
+
+        console.log(response.data,'update project')
+        dispatch(addStatusManagement(data))
+        toast.success(response.data)
+      }
+
+     }catch(error){
+      console.error(error,"update project error")
+      if(error.response?.status===401){ 
+        toast.error("Unauthorized access. Please log in again.")
+      }else{
+        toast.error("Something went wrong. Please try again.")
+      }
+     }
+  }
+  return { Get_User, CreateProject, Get_Employee,UpdateProject };
 };
 
 export default useUser;

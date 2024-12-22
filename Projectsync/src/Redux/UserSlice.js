@@ -25,6 +25,22 @@ const UserSlice = createSlice({
         addProjects:(state,action)=>{
           state.projects=action.payload
         },
+        addDeleteProject:(state,action)=>{
+            const id = action.payload
+            state.projects = state.projects.filter((project)=>project.id !== id)
+        },
+        addStatusManagement: (state, action) => {
+            const id = action.payload;
+            state.projects = state.projects.map((project) => {
+              if (project.id === id) {
+                return {
+                  ...project,
+                  status: project.status === "planned" ? "active" : "Completed", 
+                };
+              }
+              return project; 
+            });
+          },
         addLogout:(state,action)=>{
              state.userdata = null
              state.userDetails = null
@@ -34,6 +50,6 @@ const UserSlice = createSlice({
     }
 })
 
-export const {addUserdata,addLogout,addUserDetails,addEmployees,addProjects} = UserSlice.actions;
+export const {addUserdata,addLogout,addUserDetails,addEmployees,addProjects,addDeleteProject,addStatusManagement} = UserSlice.actions;
 
 export default UserSlice.reducer
