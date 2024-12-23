@@ -20,6 +20,8 @@ import Users from "./Components/Users.jsx";
 
 
 const User = lazy(() => import("./Components/Users.jsx"))
+const ProjectDetailsPage = lazy(()=> import("./Components/ProjectDetailsPage.jsx")
+)
 function App() {
   return (
     <>
@@ -32,6 +34,7 @@ function App() {
               <Route path="/signup" element={<AuthPrivetRoute><Signup /></AuthPrivetRoute >} />
               <Route path="/userhome" element={<PrivetRoute><User_Layout /></PrivetRoute>}>
                  <Route index element={<User_Dashboard />} />
+                 <Route path="/userhome/Projectdetails" element={<Suspense fallback={<Spinner />}><ProjectDetailsPage /></Suspense>}/>
                
               </Route>
 

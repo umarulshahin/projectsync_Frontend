@@ -5,6 +5,7 @@ import useUser from "../Hooks/useUser";
 import ModalManager from "../Modals/ModalManager";
 import { PlusCircle, Eye, Trash, Pencil, RotateCw } from "lucide-react";
 import { Menu } from "@headlessui/react";
+import { useNavigate } from "react-router-dom";
 
 const User_Dashboard = () => {
   const Userdetails = useSelector((state) => state.userdata.userDetails);
@@ -13,6 +14,7 @@ const User_Dashboard = () => {
 
   const [Modal, setModal] = useState(false);
   const [userdata, setUserdata] = useState(null);
+  const navigate = useNavigate()
 
   const { is_permission } = Userdetails || {};
   const { Get_User } = useUser();
@@ -136,6 +138,7 @@ const User_Dashboard = () => {
                             <Menu.Item>
                               {({ active }) => (
                                 <button
+                                 onClick={()=>navigate('/userhome/Projectdetails',{state:project})}
                                   className={`${
                                     active
                                       ? "bg-gray-50 text-gray-900"

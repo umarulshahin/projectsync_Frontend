@@ -8,7 +8,7 @@ import {
   GetEmployee_URL,
   ProjctStatus_URL,
 } from "../Utils/Constance";
-import { addEmployees, addProjects, addStatusManagement, addUserDetails } from "../Redux/UserSlice";
+import { addEmployees, addProjects, addRemoveMember, addStatusManagement, addUserDetails } from "../Redux/UserSlice";
 import { toast } from "sonner";
 
 const useUser = () => {
@@ -99,18 +99,23 @@ const useUser = () => {
     }
   };
 
-  const UpdateProject = async(data)=>{
+  const UpdateProject = async(urls,data,type)=>{
      try{
 
-      const response = await UserAxios.put(ProjctStatus_URL,data,{
+      const response = await UserAxios.put(urls,data,{
         headers:{
           "content-Type" : "application/json"
         }
       })
       if(response.status === 200){
+           
+        if(type && type === 'status'){
+          dispatch(addStatusManagement(data))
 
+        }else if (type && type === 'member remove'){
+          dispatch(addRemoveMember(data))
+        }
         console.log(response.data,'update project')
-        dispatch(addStatusManagement(data))
         toast.success(response.data)
       }
 

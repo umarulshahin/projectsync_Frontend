@@ -1,5 +1,6 @@
 import React from "react";
 import useUser from "../Hooks/useUser";
+import { ProjctStatus_URL } from "../Utils/Constance";
 
 const ProjectStatusModal = ({ projectdata, isModal, isOpen }) => {
   if (!isOpen) return null;
@@ -10,7 +11,7 @@ const ProjectStatusModal = ({ projectdata, isModal, isOpen }) => {
 
   const handleConfirm = () => {
     console.log("Project status changed", projectdata);
-    UpdateProject(projectdata.id)
+    UpdateProject(ProjctStatus_URL ,projectdata.id,'status')
     isModal(null)
   }
   return (

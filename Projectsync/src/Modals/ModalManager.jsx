@@ -5,6 +5,7 @@ import AddProject from './AddProject'
 import DeleteProject from './DeleteProject'
 import ProjectStatusModal from './ProjectStatusModal'
 import EditProjctModal from './EditProjctModal'
+import RemoveMember from './RemoveMember'
 
 const ModalManager = ({userdata,modaltype,isModal}) => {
    console.log('yes working modal manager')
@@ -26,6 +27,9 @@ const ModalManager = ({userdata,modaltype,isModal}) => {
 
     case 'editproject':
         return (<EditProjctModal projectdata={userdata} isModal={isModal} isOpen={modaltype === 'editproject'} />) 
+    
+    case "remove member":
+        return (<RemoveMember projectdata={userdata} isModal={isModal} isOpen={modaltype === "remove member"}  />)
     
     default: 
        return null

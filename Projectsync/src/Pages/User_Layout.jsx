@@ -6,11 +6,10 @@ const User_Layout = () => {
   return (
     <div className='min-h-screen' >
       <User_Header />
-    <main className=' pt-20'>
+    <main className=' pt-20 bg-stone-300'>
       <Outlet />
     </main>
     </div>
   )
 }
-
 export default User_Layout
