@@ -36,6 +36,12 @@ const User_Dashboard = () => {
     setModal('statusmanagement')
     setUserdata(value)
   }
+
+  const handleEditProject = (value) =>{
+    console.log(value, "edit project");
+    setModal('editproject')
+    setUserdata(value)
+  }
   return (
     <div className="text-black bg-stone-300 min-h-screen">
       {is_permission && (
@@ -162,6 +168,7 @@ const User_Dashboard = () => {
                                   <Menu.Item>
                                     {({ active }) => (
                                       <button
+                                      onClick={()=> handleEditProject(project)}
                                         className={`${
                                           active
                                             ? "bg-gray-50 text-gray-900"

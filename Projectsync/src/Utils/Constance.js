@@ -19,3 +19,5 @@ export const GetEmployee_URL = Backend_base+"getemployee/";
 export const DeleteProject_URL = Backend_base+"deleteproject/";
 
 export const ProjctStatus_URL = Backend_base+"projectstatus/";
+
+export const EditProject_URL = Backend_base+"editproject/";

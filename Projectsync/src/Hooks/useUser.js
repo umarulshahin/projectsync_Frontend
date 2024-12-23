@@ -3,6 +3,7 @@ import UserAxios from "../Axios/UserAxios";
 import { useDispatch, useSelector } from "react-redux";
 import {
   CreateProject_URL,
+  EditProject_URL,
   Get_User_URL,
   GetEmployee_URL,
   ProjctStatus_URL,
@@ -122,7 +123,29 @@ const useUser = () => {
       }
      }
   }
-  return { Get_User, CreateProject, Get_Employee,UpdateProject };
+  const EditProject = async (data)=>{
+    try{
+       const response = await UserAxios.patch(EditProject_URL,data,{
+        header:{
+          "Content-Type":"application/json"
+        }
+         
+       })
+       if(response.status ===200){
+        console.log(response.data,'edit project')
+        toast.success(response.data)
+        Get_User(user.user_id)
+       }
+    }catch(error){
+      console.error(error,"edit project error")
+      if(error.response?.status===401){   
+        toast.error("Unauthorized access. Please log in again.")
+      }else{
+        toast.error("Something went wrong. Please try again.")
+      }
+    }
+  }
+  return { Get_User, CreateProject, Get_Employee,UpdateProject,EditProject };
 };
 
 export default useUser;
