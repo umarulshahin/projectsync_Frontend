@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addDeleteProject, addProjectTeam } from '../Redux/UserSlice';
 
 const useBase = () => {
-   const {Get_User}=useUser()
    const user = useSelector((status)=>status.userdata.userdata)
    const dispatch = useDispatch()
 

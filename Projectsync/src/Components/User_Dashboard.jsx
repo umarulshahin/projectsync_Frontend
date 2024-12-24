@@ -138,7 +138,7 @@ const User_Dashboard = () => {
                             <Menu.Item>
                               {({ active }) => (
                                 <button
-                                 onClick={()=>navigate('/userhome/Projectdetails',{state:project})}
+                                 onClick={()=>navigate('/userhome/Projectdetails',{state:{project:project,is_permission:is_permission}})}
                                   className={`${
                                     active
                                       ? "bg-gray-50 text-gray-900"
