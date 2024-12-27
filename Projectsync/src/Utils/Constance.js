@@ -29,3 +29,5 @@ export const RemoveTeamMember_URL = Backend_base+"removeteammember/";
 export const AddNewMember_URL = Backend_base+"addnewmember/";
 
 export const AddNewTask_URL = Backend_base+"addnewtask/";
+
+export const Get_Tasks_URL = Backend_base+"Get_Tasks/"

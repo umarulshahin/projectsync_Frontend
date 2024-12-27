@@ -1,10 +1,10 @@
 import React from 'react'
 import { toast } from 'sonner';
 import BaseAxios from '../Axios/BaseAxios';
-import { AddNewTask_URL, DeleteProject_URL, GetProjectTeam_URL } from '../Utils/Constance';
+import { AddNewTask_URL, DeleteProject_URL, Get_Tasks_URL, GetProjectTeam_URL } from '../Utils/Constance';
 import useUser from './useUser';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDeleteProject, addProjectTeam } from '../Redux/UserSlice';
+import { addDeleteProject, addProjectTeam, addTasks } from '../Redux/UserSlice';
 
 const useBase = () => {
    const user = useSelector((status)=>status.userdata.userdata)
@@ -66,6 +66,31 @@ const useBase = () => {
         }
     }
 
+    const Get_Tasks = async (role=null,data)=>{
+        console.log(data,'data')
+        try{
+ 
+         const response = await BaseAxios.get(Get_Tasks_URL,{
+             
+             params:{id:data},
+             headers:{
+                 "Content-Type":"application/json"
+             }
+         })
+         if(response.status===200){
+             console.log(response.data,"get tasks")
+             dispatch(addTasks(response.data))
+         }
+        }catch(error){
+         console.error(error,"get tasks error")
+         if(error.response?.status===401){   
+             toast.error("Unauthorized access. Please log in again.");
+         }else{
+             toast.warning("Something went wrong. Please try again later.");
+         }
+        }
+     }   
+     
     const AddNewTask= async(role=null,data)=>{
         try{
 
@@ -77,6 +102,7 @@ const useBase = () => {
             if(response.status === 201){
                 console.log(response.data,"add new task")
                 toast.success(response.data)
+                Get_Tasks(null,data.project_id)
             }
         }catch(error){
 
@@ -88,7 +114,8 @@ const useBase = () => {
             }
         }
     }
-    return {Delete_Project,GetProjectTeam,AddNewTask}
+
+    return {Delete_Project,GetProjectTeam,AddNewTask,Get_Tasks}
 
 }
 

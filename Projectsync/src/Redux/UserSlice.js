@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
+
 
 const UserSlice = createSlice({
   name: "userdata",
@@ -9,6 +9,7 @@ const UserSlice = createSlice({
     employees: null,
     projects: null,
     projectTeam: null,
+    tasks:null
   },
 
   reducers: {
@@ -47,11 +48,15 @@ const UserSlice = createSlice({
      const id = action.payload
      state.projectTeam = state.projectTeam.filter((project)=>project.id !== id)
     },
+    addTasks:(state,action)=>{
+        state.tasks = action.payload
+    },
     addLogout: (state, action) => {
       state.userdata = null;
       state.userDetails = null;
       state.projects = null;
       state.projectTeam = null;
+      state.tasks = null
     },
   },
 });
@@ -66,6 +71,7 @@ export const {
   addStatusManagement,
   addProjectTeam,
   addRemoveMember,
+  addTasks
 } = UserSlice.actions;
 
 export default UserSlice.reducer;
