@@ -42,7 +42,7 @@ const NewMember = ({ member,isOpen}) => {
         value={selectedMembers}
         onChange={(selectedOptions) => setSelectedMembers(selectedOptions)}
         placeholder="Select team members "
-        className="w-full mb-4 border border-stone-300 focus:outline-stone-400 focus:border-stone-400"
+        className="w-full mb-4 border border-stone-300 focus:border-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-400"
       />
       <button
         onClick={handleAddMembers}

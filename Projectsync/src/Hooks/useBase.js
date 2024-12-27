@@ -1,7 +1,7 @@
 import React from 'react'
 import { toast } from 'sonner';
 import BaseAxios from '../Axios/BaseAxios';
-import { DeleteProject_URL, GetProjectTeam_URL } from '../Utils/Constance';
+import { AddNewTask_URL, DeleteProject_URL, GetProjectTeam_URL } from '../Utils/Constance';
 import useUser from './useUser';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDeleteProject, addProjectTeam } from '../Redux/UserSlice';
@@ -65,7 +65,30 @@ const useBase = () => {
             }
         }
     }
-    return {Delete_Project,GetProjectTeam}
+
+    const AddNewTask= async(role=null,data)=>{
+        try{
+
+            const response = await BaseAxios.post(AddNewTask_URL,data,{
+                headers:{
+                    "Content-Type":"application/json"
+                }
+            })
+            if(response.status === 201){
+                console.log(response.data,"add new task")
+                toast.success(response.data)
+            }
+        }catch(error){
+
+            console.error(error,"add new task error")
+            if(error.response.status === 401){
+                toast.error("Unauthorized access. Please log in again.")
+            }else{
+                toast.error("Something went wrong. Please try again.")
+            }
+        }
+    }
+    return {Delete_Project,GetProjectTeam,AddNewTask}
 
 }
 

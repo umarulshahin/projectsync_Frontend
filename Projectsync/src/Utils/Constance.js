@@ -27,3 +27,5 @@ export const GetProjectTeam_URL = Backend_base+"getprojectteam/";
 export const RemoveTeamMember_URL = Backend_base+"removeteammember/";
 
 export const AddNewMember_URL = Backend_base+"addnewmember/";
+
+export const AddNewTask_URL = Backend_base+"addnewtask/";
