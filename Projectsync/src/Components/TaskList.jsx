@@ -3,19 +3,22 @@ import { useSelector } from 'react-redux';
 import useBase from '../Hooks/useBase';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import ModalManager from '../Modals/ModalManager';
 
 const TaskList = ({ project_id }) => {
   const tasks = useSelector((state) => state.userdata.tasks);
   const { Get_Tasks } = useBase();
   const [activeTab, setActiveTab] = useState("all");
   const [Tasks, setTasks] = useState(null)
+  const [Taskdata , setTaskdata] = useState(null)
+  const [isModal , setisModal] = useState(null)
 
   useEffect(() => {
     if (project_id) {
       Get_Tasks(null, project_id);
     }
   }, [project_id]);
-
+  
   useEffect(()=>{
    
     const values = tasks && tasks.filter((task)=>{
@@ -42,8 +45,12 @@ const TaskList = ({ project_id }) => {
 
   const handleAction = (taskId, action) => {
     console.log(`Action: ${action} for Task ID: ${taskId}`);
-    // Implement action logic (view/edit/delete)
+    
+    setisModal(action)
+    setTaskdata(taskId)
   };
+
+
 
   return (
     <div className="container mx-auto py-6 ">
@@ -137,21 +144,12 @@ const TaskList = ({ project_id }) => {
                         </Menu.Button>
                       </div>
 
-                      <Transition
-                        as={React.Fragment}
-                        enter="transition ease-out duration-100"
-                        enterFrom="transform opacity-0 scale-95"
-                        enterTo="transform opacity-100 scale-100"
-                        leave="transition ease-in duration-75"
-                        leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95"
-                      >
                         <Menu.Items className="absolute  right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <div className="py-1 ">
                             <Menu.Item>
                               {({ active }) => (
                                 <button
-                                  onClick={() => handleAction(task.id, 'View')}
+                                  onClick={() => handleAction({id:task.id,name:task.title}, 'Task_View')}
                                   className={`${
                                     active ? 'bg-stone-300 text-gray-900' : 'text-gray-700'
                                   } block px-4 py-2 text-sm  w-full `}
@@ -163,7 +161,7 @@ const TaskList = ({ project_id }) => {
                             <Menu.Item>
                               {({ active }) => (
                                 <button
-                                  onClick={() => handleAction(task.id, 'Edit')}
+                                  onClick={() => handleAction({id:task.id,name:task.title}, 'Task_Edit')}
                                   className={`${
                                     active ? 'bg-stone-300 text-gray-900' : 'text-gray-700'
                                   } block px-4 py-2 text-sm  w-full`}
@@ -175,7 +173,7 @@ const TaskList = ({ project_id }) => {
                             <Menu.Item>
                               {({ active }) => (
                                 <button
-                                  onClick={() => handleAction(task.id, 'Delete')}
+                                  onClick={() => handleAction({id:task.id,name:task.title}, 'Task_Delete')}
                                   className={`${
                                     active ? 'bg-stone-300 text-gray-900' : 'text-red-500'
                                   } block px-4 py-2 text-sm  w-full`}
@@ -186,7 +184,6 @@ const TaskList = ({ project_id }) => {
                             </Menu.Item>
                           </div>
                         </Menu.Items>
-                      </Transition>
                     </Menu>
                   </td>
                 </tr>
@@ -199,6 +196,8 @@ const TaskList = ({ project_id }) => {
           </tbody>
         </table>
       </div>
+
+      <ModalManager userdata={Taskdata} modaltype={isModal} isModal={setisModal} />
     </div>
   );
 };

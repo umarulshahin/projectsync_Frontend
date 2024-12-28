@@ -51,6 +51,11 @@ const UserSlice = createSlice({
     addTasks:(state,action)=>{
         state.tasks = action.payload
     },
+    addRemoveTask:(state,action)=>{
+          const id = action.payload
+
+          state.tasks = state.tasks.filter((task)=> task.id !== id)
+    },
     addLogout: (state, action) => {
       state.userdata = null;
       state.userDetails = null;
@@ -71,7 +76,8 @@ export const {
   addStatusManagement,
   addProjectTeam,
   addRemoveMember,
-  addTasks
+  addTasks,
+  addRemoveTask
 } = UserSlice.actions;
 
 export default UserSlice.reducer;

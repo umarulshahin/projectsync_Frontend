@@ -1,10 +1,10 @@
 import React from 'react'
 import { toast } from 'sonner';
 import BaseAxios from '../Axios/BaseAxios';
-import { AddNewTask_URL, DeleteProject_URL, Get_Tasks_URL, GetProjectTeam_URL } from '../Utils/Constance';
+import { AddNewTask_URL, Delete_Tasl_URL, DeleteProject_URL, Get_Tasks_URL, GetProjectTeam_URL } from '../Utils/Constance';
 import useUser from './useUser';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDeleteProject, addProjectTeam, addTasks } from '../Redux/UserSlice';
+import { addDeleteProject, addProjectTeam, addRemoveTask, addTasks } from '../Redux/UserSlice';
 
 const useBase = () => {
    const user = useSelector((status)=>status.userdata.userdata)
@@ -115,7 +115,35 @@ const useBase = () => {
         }
     }
 
-    return {Delete_Project,GetProjectTeam,AddNewTask,Get_Tasks}
+
+    const Delete_Task = async (role=null,data)=>{
+        try{
+
+            const response = await BaseAxios.delete(Delete_Tasl_URL,{
+                meta:{role},
+                data:{id:data},
+                header:{
+                    "Content-Type": "application/json"
+                }
+            })
+            if(response.status === 200){
+                console.log(response.data,'delete task')   
+                dispatch(addRemoveTask(data)) 
+                toast.success(response.data)
+
+            }
+
+        }catch(error){
+
+            console.error(error,'delete task error')
+            if(error.response.status === 401){
+                toast.error("Unauthorized access. Please log in again.")
+            }else{
+                toast.error("Something went wrong. Please try again.")
+            }
+        }
+    }
+    return {Delete_Project,GetProjectTeam,AddNewTask,Get_Tasks,Delete_Task}
 
 }
 

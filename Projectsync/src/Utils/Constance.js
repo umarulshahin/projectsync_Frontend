@@ -30,4 +30,6 @@ export const AddNewMember_URL = Backend_base+"addnewmember/";
 
 export const AddNewTask_URL = Backend_base+"addnewtask/";
 
-export const Get_Tasks_URL = Backend_base+"Get_Tasks/"
+export const Get_Tasks_URL = Backend_base+"Get_Tasks/";
+
+export const Delete_Tasl_URL = Backend_base+"delete_task/"
