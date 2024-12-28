@@ -19,16 +19,21 @@ const validationSchema = Yup.object({
 const EditTask = ({ Task_data, isModal, isOpen }) => {
   if (!isOpen) return null;
 
-  const employees = useSelector((state) => state.userdata.employees);
+  const employee = useSelector((state) => state.userdata.projectTeam);
   const userdata = useSelector((state) => state.userdata.userDetails);
   const { project_id } = Task_data;
   const Taskdata = Task_data.task;
+  console.log(Task_data ,'task data');
+  
+  const employees = employee && Array.isArray(employee) && employee.length > 0 ? employee.map((emp) => emp.employee) : [];
 
   const { EditTasks } = useBase();
 
-  console.log(userdata);
+  console.log(Taskdata,'task data');
   // Helper function to move the current value to the top
   const prioritizeCurrentValue = (options, currentValue, key) => {
+
+    console.log(options, currentValue, key,'current values');
     const prioritized = options.filter((opt) => opt[key] === currentValue);
     const others = options.filter((opt) => opt[key] !== currentValue);
     return [...prioritized, ...others];

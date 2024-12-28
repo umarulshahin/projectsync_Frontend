@@ -14,6 +14,8 @@ const TaskList = ({ project_id }) => {
   const [Taskdata, setTaskdata] = useState(null);
   const [isModal, setisModal] = useState(null);
 
+  console.log(tasks,'tasks')
+
   useEffect(() => {
     if (project_id) {
       Get_Tasks(null, project_id);
@@ -204,7 +206,7 @@ const TaskList = ({ project_id }) => {
                               <button
                                 onClick={() =>
                                   handleAction(
-                                    { id: task.id, name: task.title },
+                                    task ,
                                     "Task_View"
                                   )
                                 }
