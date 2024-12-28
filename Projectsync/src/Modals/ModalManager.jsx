@@ -8,6 +8,7 @@ import EditProjctModal from './EditProjctModal'
 import RemoveMember from './RemoveMember'
 import AddTask from './AddTask'
 import TaskDeleteModal from './TaskDeleteModal'
+import EditTask from './EditTask'
 
 const ModalManager = ({userdata,modaltype,isModal}) => {
    console.log('yes working modal manager')
@@ -38,6 +39,9 @@ const ModalManager = ({userdata,modaltype,isModal}) => {
 
     case "Task_Delete" : 
        return (<TaskDeleteModal  Taskdata={userdata} isModal={isModal} isOpen={modaltype === "Task_Delete"}/>)
+
+    case "Task_Edit":
+        return (<EditTask Task_data={userdata} isModal={isModal} isOpen={modaltype === "Task_Edit"}/>)
     
     default: 
        return null
