@@ -157,17 +157,17 @@ const ProjectDetailsPage = () => {
               )}
             </div>
           </div>
-          <div className="min-w-7xl">
-          <TaskList project_id={project.id} />
-
-          </div>
+      
 
           {OpenNewMember && (
             <div>
               <NewMember member={projectTeam} isOpen={setOpenNewMember} />
             </div>
           )}
+    <div className="min-w-7xl">
+          <TaskList project_id={project.id} />
 
+          </div>
           {openModal && (
             <ModalManager
               userdata={projectdata}
