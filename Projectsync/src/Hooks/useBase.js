@@ -5,6 +5,7 @@ import { AddNewTask_URL, Delete_Tasl_URL, DeleteProject_URL, Edit_Task_URL, Get_
 import useUser from './useUser';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDeleteProject, addProjectTeam, addRemoveTask, addTasks } from '../Redux/UserSlice';
+import { addRemoveProjectList } from '../Redux/AdminSlice';
 
 const useBase = () => {
    const user = useSelector((status)=>status.userdata.userdata)
@@ -21,14 +22,15 @@ const useBase = () => {
                     "Content-Type":"application/json"
                 }
               })
-              if(response.status===200){
-                console.log(response.data)
-                toast.success(response.data)
-                if(role === "admin"){
 
+              if(response.status===200){
+
+                if(role === "admin"){
+                    dispatch(addRemoveProjectList(data))
                 }else{
                     dispatch(addDeleteProject(data))
                 }
+                toast.success(response.data)
 
               }
         }catch(error){
@@ -128,8 +130,15 @@ const useBase = () => {
                 }
             })
             if(response.status === 200){
-                console.log(response.data,'delete task')   
-                dispatch(addRemoveTask(data)) 
+                console.log(response.data,'delete task')
+
+                if(role === 'admin'){
+                    console.log('yes admin')
+                  
+                }else{
+                    dispatch(addRemoveTask(data)) 
+
+                }
                 toast.success(response.data)
 
             }
@@ -155,8 +164,14 @@ const useBase = () => {
                 }
             })
             if(response.status === 200){
+
                 console.log(response.data,'edit task')
-                Get_Tasks(null,data.project_id)
+                if(role === 'admin'){
+                   console.log('yes admin')
+                }else{
+                    Get_Tasks(null,data.project_id)
+
+                }
                 toast.success(response.data)
             }
         }catch(error){

@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-
-
+ 
 const AdminSlice = createSlice({
     name:"Admindata",
     
@@ -20,6 +18,11 @@ const AdminSlice = createSlice({
         addProjectList:(state,action)=>{
             state.Project_list = action.payload
         },
+        addRemoveProjectList:(state,action)=>{
+
+            const id = action.payload
+              state.Project_list = state.Project_list.filter((project)=> project.id !== id)
+        },
         addAdmin_Logout : (state, action)=>{
             state.admindata = null
             state.user_list = null
@@ -27,5 +30,5 @@ const AdminSlice = createSlice({
     }
 })
 
-export const {addAdmindata,addAdmin_Logout,addUserList,addProjectList} = AdminSlice.actions;
+export const {addAdmindata,addAdmin_Logout,addUserList,addProjectList,addRemoveProjectList} = AdminSlice.actions;
 export default AdminSlice.reducer;

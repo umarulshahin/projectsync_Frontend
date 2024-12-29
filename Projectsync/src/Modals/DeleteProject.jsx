@@ -8,10 +8,17 @@ const DeleteProject = ({ projectdata, isModal, isOpen,  }) => {
   const {Delete_Project}=useBase()
 
   const handleConfirm=()=>{
-    console.log("Project deleted", projectdata);
-     Delete_Project(null,projectdata.id)
+
+    if(projectdata.role === 'admin'){
+
+      Delete_Project('admin',projectdata.id)
+    }else{
+      Delete_Project(null,projectdata.id)
+
+    }
      isModal(null)
   }
+  console.log(projectdata,'projectdata')
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -24,7 +31,7 @@ const DeleteProject = ({ projectdata, isModal, isOpen,  }) => {
           </h2>
           <p className="text-sm text-gray-600 text-center mt-2">
             Are you sure you want to delete the project{" "}
-            <span className="font-bold">{projectdata?.projectName}</span>? This
+            <span className="font-bold">{projectdata && projectdata.projectName ? projectdata.projectName : projectdata.title}</span>? This
             action cannot be undone.
           </p>
         </div>
