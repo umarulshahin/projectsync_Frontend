@@ -1,8 +1,8 @@
 import React from 'react'
 import AdminAxios from '../Axios/AdminAxios'
-import { GetUsers_URL } from '../Utils/Constance'
+import { GetProjects_URL, GetUsers_URL } from '../Utils/Constance'
 import { useDispatch } from 'react-redux'
-import { addUserList } from '../Redux/AdminSlice'
+import { addProjectList, addUserList } from '../Redux/AdminSlice'
 import { toast } from 'sonner'
 
 const useAdmin = () => {
@@ -46,7 +46,28 @@ const useAdmin = () => {
       toast.error("Something went wrong. Please try again later.")
     }
   }
-  return {GetUsers,UserManagement}
+
+  const Get_Projects = async ()=>{
+    try{
+      const response = await AdminAxios.get(GetProjects_URL,{
+        headers:{
+          "Content-Type" : "application/json"
+        }
+      })
+      if(response.status ===200){
+        dispatch(addProjectList(response.data))
+      }
+
+    }catch(error){
+      console.log(error,'get projects error')
+      if(error.response?.status === 401){
+        toast.error("unauthorized access place login again")
+      }else{
+        toast.error("something went wrong please try again")
+      }
+    }
+  }
+  return {GetUsers,UserManagement,Get_Projects}
 }
 
 export default useAdmin

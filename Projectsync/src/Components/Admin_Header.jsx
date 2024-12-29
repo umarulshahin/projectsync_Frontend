@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import projectsync from "../assets/projectsync.png";
 import profile from "../assets/profile_img.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,22 @@ const Admin_Header= () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleLogout = () => {
     Cookies.remove('adminToken');
@@ -23,10 +39,11 @@ const Admin_Header= () => {
   };
 
   return (
-    <header className="fixed top-0 right-0 left-16 md:left-48 bg-orange-200/80 border-b border-gray-400">
+    <header className={`fixed top-0 right-0 left-16 md:left-48 ${isScrolled ? "bg-orange-200" : "bg-orange-200/80"} border-b z-50 border-gray-400`}>
       <div className="flex justify-between items-center h-20 px-6">
         {location.pathname === '/adminhome' && (<h1 className="text-2xl font-medium">Dashboard</h1>)}
         {location.pathname === '/adminhome/user' && (<h1 className="text-2xl font-medium">Users</h1>)}
+        {location.pathname === '/adminhome/project' && (<h1 className="text-2xl font-medium">Projects</h1>)}
 
         
         <div className="relative">

@@ -36,7 +36,7 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
-          to="/dsf"
+          to="/adminhome/project"
           className={({ isActive }) => `
             w-full flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-white hover:text-orange-600 hover:rounded-full
             ${isActive ? 'bg-white text-orange-600 rounded-full' : ''}

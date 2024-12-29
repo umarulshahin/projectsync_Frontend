@@ -16,12 +16,13 @@ import { lazy, Suspense } from "react";
 import Spinner from "./Components/spinner.jsx";
 import User_Layout from "./Pages/User_Layout.jsx";
 import User_Dashboard from "./Components/User_Dashboard.jsx";
-import Users from "./Components/Users.jsx";
 
 
-const User = lazy(() => import("./Components/Users.jsx"))
-const ProjectDetailsPage = lazy(()=> import("./Components/ProjectDetailsPage.jsx")
-)
+const Users = lazy(() => import("./Components/Users.jsx"))
+const ProjectDetailsPage = lazy(()=> import("./Components/ProjectDetailsPage.jsx"))
+const Admin_Project_page = lazy(()=>import("./Pages/Admin_Project_page.jsx"))
+
+
 function App() {
   return (
     <>
@@ -41,6 +42,7 @@ function App() {
               <Route path="/adminhome" element={<AdminPrivetRoute><Admin_Layout/></AdminPrivetRoute> }>
                <Route index element={<Admin_Dashboard />}/>
                <Route path="/adminhome/user" element={<Suspense fallback={<Spinner />} ><Users /> </ Suspense>}/> 
+               <Route path="/adminhome/project" element={<Suspense fallback={<Spinner />}><Admin_Project_page /></Suspense>} />
 
               </Route>
 

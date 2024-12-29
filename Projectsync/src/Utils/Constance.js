@@ -35,3 +35,5 @@ export const Get_Tasks_URL = Backend_base+"Get_Tasks/";
 export const Delete_Tasl_URL = Backend_base+"delete_task/";
 
 export const Edit_Task_URL = Backend_base+"update_task/";
+
+export const GetProjects_URL = Backend_base+"getprojects/";
