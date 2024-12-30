@@ -4,13 +4,12 @@ import BaseAxios from '../Axios/BaseAxios';
 import { AddNewTask_URL, Delete_Tasl_URL, DeleteProject_URL, Edit_Task_URL, Get_Tasks_URL, GetProjectTeam_URL } from '../Utils/Constance';
 import useUser from './useUser';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDeleteProject, addProjectTeam, addRemoveTask, addTasks } from '../Redux/UserSlice';
-import { addRemoveProjectList } from '../Redux/AdminSlice';
+import { addDeleteProject, addProjectTeam, addRemoveMember, addRemoveTask, addStatusManagement, addTasks } from '../Redux/UserSlice';
+import { addProjectStatus, addRemoveProjectList } from '../Redux/AdminSlice';
 
 const useBase = () => {
    const user = useSelector((status)=>status.userdata.userdata)
    const dispatch = useDispatch()
-
 
     const Delete_Project= async (role=null,data)=>{
       
@@ -140,7 +139,6 @@ const useBase = () => {
 
                 }
                 toast.success(response.data)
-
             }
 
         }catch(error){
@@ -155,10 +153,11 @@ const useBase = () => {
     }
 
     const EditTasks=async(role=null,data)=>{
-        console.log(data,'data')
+       
         try{
 
             const response = await BaseAxios.put(Edit_Task_URL,data,{
+                meta:{role},
                 headers:{
                     "Content-Type" : "application/json"
                 }
@@ -183,7 +182,41 @@ const useBase = () => {
             }
         }
     }
-    return {Delete_Project,GetProjectTeam,AddNewTask,Get_Tasks,Delete_Task,EditTasks}
+
+    const UpdateProject = async( role = null ,urls,data,type)=>{
+        try{
+   
+         const response = await BaseAxios.put(urls,data,{
+
+           meta:{role},
+           headers:{
+             "content-Type" : "application/json"
+           }
+         })
+         if(response.status === 200){
+            console.log(response.data,'update project')
+
+           if(type && type === 'status' && !role){
+             dispatch(addStatusManagement(data))
+   
+           }else if (type && type === 'member remove' && !role){
+             dispatch(addRemoveMember(data))
+
+           }else if (type && type === 'status' && role === 'admin'){
+               dispatch(addProjectStatus(data))
+           }
+           toast.success(response.data)
+         }
+        }catch(error){
+         console.error(error,"update project error")
+         if(error.response?.status===401){ 
+           toast.error("Unauthorized access. Please log in again.")
+         }else{
+           toast.error("Something went wrong. Please try again.")
+         }
+        }
+     }
+    return {Delete_Project,GetProjectTeam,AddNewTask,Get_Tasks,Delete_Task,EditTasks,UpdateProject}
 
 }
 

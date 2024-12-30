@@ -150,6 +150,7 @@ const User_Dashboard = () => {
                                 </button>
                               )}
                             </Menu.Item>
+                            {project && project.status !== "Completed" && 
                             <Menu.Item>
                               {({ active }) => (
                                 <button
@@ -164,7 +165,7 @@ const User_Dashboard = () => {
                                   Change Status
                                 </button>
                               )}
-                            </Menu.Item>
+                            </Menu.Item>}
                             <div className="py-1">
                               {is_permission && (
                                 <>

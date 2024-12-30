@@ -1,18 +1,20 @@
 import React from "react";
-import useUser from "../Hooks/useUser";
 import { ProjctStatus_URL } from "../Utils/Constance";
+import useBase from "../Hooks/useBase";
 
 const ProjectStatusModal = ({ projectdata, isModal, isOpen }) => {
   if (!isOpen) return null;
 
-  const {UpdateProject}=useUser()
-
-
+  const {UpdateProject} = useBase()
 
   const handleConfirm = () => {
-    console.log("Project status changed", projectdata);
-    UpdateProject(ProjctStatus_URL ,projectdata.id,'status')
+  
+    const role = projectdata && projectdata.role ? projectdata.role : null
+
+    UpdateProject(role,ProjctStatus_URL ,projectdata.id,'status')
     isModal(null)
+  
+    
   }
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">

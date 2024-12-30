@@ -1,17 +1,16 @@
 import React from 'react';
 import { XMarkIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import useUser from '../Hooks/useUser';
-import { Portal } from '@headlessui/react';
 import { RemoveTeamMember_URL } from '../Utils/Constance';
+import useBase from '../Hooks/useBase';
 
 const RemoveMember = ({ projectdata, isModal, isOpen }) => {
   if (!isOpen) return null;
-
-  const {UpdateProject} = useUser()
+  
+  const {UpdateProject } = useBase()
 
   const handleConfirm = () => {
     // Handle member removal logic here
-    UpdateProject(RemoveTeamMember_URL,projectdata.id,'member remove')
+    UpdateProject(null,RemoveTeamMember_URL,projectdata.id,'member remove')
 
     isModal(false);
   };

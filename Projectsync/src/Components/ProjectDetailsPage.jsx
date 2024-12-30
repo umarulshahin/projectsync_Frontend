@@ -96,8 +96,8 @@ const ProjectDetailsPage = () => {
                   project.status === "Completed"
                     ? "text-green-600"
                     : project.status === "In Progress"
-                    ? "text-blue-600"
-                    : "text-gray-600"
+                    ? "text-yellow-600"
+                    : "text-blue-600"
                 }`}
               >
                 {project.status || "N/A"}

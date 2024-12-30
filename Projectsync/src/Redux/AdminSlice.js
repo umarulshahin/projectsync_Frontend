@@ -23,12 +23,26 @@ const AdminSlice = createSlice({
             const id = action.payload
               state.Project_list = state.Project_list.filter((project)=> project.id !== id)
         },
+        addProjectStatus:(state,action)=>{
+          const id = action.payload
+          state.Project_list = state.Project_list.map((project)=>{
+            if(project.id === id ){
+                return {
+                    ...project,
+                    status : project.status === "planned" ? "active" : "Completed"
+                }
+            }
+            return project
+
+          })
+        },
         addAdmin_Logout : (state, action)=>{
             state.admindata = null
             state.user_list = null
+            state.Project_list = null
         },
     }
 })
 
-export const {addAdmindata,addAdmin_Logout,addUserList,addProjectList,addRemoveProjectList} = AdminSlice.actions;
+export const {addAdmindata,addAdmin_Logout,addUserList,addProjectList,addRemoveProjectList,addProjectStatus} = AdminSlice.actions;
 export default AdminSlice.reducer;

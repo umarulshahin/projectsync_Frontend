@@ -105,35 +105,7 @@ const useUser = () => {
     }
   };
 
-  const UpdateProject = async(urls,data,type)=>{
-     try{
-
-      const response = await UserAxios.put(urls,data,{
-        headers:{
-          "content-Type" : "application/json"
-        }
-      })
-      if(response.status === 200){
-           
-        if(type && type === 'status'){
-          dispatch(addStatusManagement(data))
-
-        }else if (type && type === 'member remove'){
-          dispatch(addRemoveMember(data))
-        }
-        console.log(response.data,'update project')
-        toast.success(response.data)
-      }
-
-     }catch(error){
-      console.error(error,"update project error")
-      if(error.response?.status===401){ 
-        toast.error("Unauthorized access. Please log in again.")
-      }else{
-        toast.error("Something went wrong. Please try again.")
-      }
-     }
-  }
+  
   const EditProject = async (data)=>{
     try{
        const response = await UserAxios.patch(EditProject_URL,data,{
@@ -181,7 +153,7 @@ const useUser = () => {
 
     }
   }
-  return { Get_User, CreateProject, Get_Employee,UpdateProject,EditProject,AddNewMember };
+  return { Get_User, CreateProject, Get_Employee, EditProject,AddNewMember };
 };
 
 export default useUser;

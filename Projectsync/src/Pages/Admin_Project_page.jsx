@@ -9,6 +9,7 @@ const Admin_Project_page = () => {
   const [projectdata, setProjectdata] = useState(null);
   
   const projects = useSelector((state) => state.admindata.Project_list);
+  console.log(projects)
   const { Get_Projects } = useAdmin();
   
   useEffect(() => {
@@ -19,6 +20,7 @@ const Admin_Project_page = () => {
     const updateproject = { ...projectdata, role: 'admin' };
     setProjectdata(updateproject);
     setModal(type);
+    setIsDropdownOpen(null)
   };
 
   return (
@@ -67,7 +69,7 @@ const Admin_Project_page = () => {
                                 : 'text-green-500'
                           }`}
                         >
-                          {project.status === 'planned' 
+                          {project.status === 'planned'
                             ? 'Planned' 
                             : project.status === 'active' 
                               ? 'Active' 
@@ -110,14 +112,15 @@ const Admin_Project_page = () => {
                                     Edit
                                   </button>
                                 </li>
-                                <li>
+                              {project && project.status !== 'Completed' ?
+                              (  <li>
                                   <button
                                     className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-200"
-                                    onClick={() => handleProject(project)}
+                                    onClick={() => handleProject(project,"statusmanagement")}
                                   >
                                     Status change
                                   </button>
-                                </li>
+                                </li>): null}
                               </ul>
                             </div>
                           )}
