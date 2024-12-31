@@ -7,10 +7,11 @@ const RemoveMember = ({ projectdata, isModal, isOpen }) => {
   if (!isOpen) return null;
   
   const {UpdateProject } = useBase()
+  const role = projectdata&& projectdata.role ?projectdata.role : null 
 
   const handleConfirm = () => {
     // Handle member removal logic here
-    UpdateProject(null,RemoveTeamMember_URL,projectdata.id,'member remove')
+    UpdateProject(role,RemoveTeamMember_URL,projectdata.id,'member remove')
 
     isModal(false);
   };

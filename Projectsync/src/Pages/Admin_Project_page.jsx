@@ -3,12 +3,14 @@ import useAdmin from "../Hooks/useAdmin";
 import { useSelector } from "react-redux";
 import ModalManager from "../Modals/ModalManager";
 import { PlusCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 
 const Admin_Project_page = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(null);
   const [Modal, setModal] = useState(null);
   const [projectdata, setProjectdata] = useState(null);
+  const navigate = useNavigate();
   
   const projects = useSelector((state) => state.admindata.Project_list);
   const { Get_Projects } = useAdmin();
@@ -26,7 +28,7 @@ const Admin_Project_page = () => {
   };
 
   return (
-    <div className="p-4 md:p-10 bg-orange-200/80 min-h-screen">
+    <div className="p-4 md:p-10 min-h-screen">
       <div className="flex flex-col">
         <div className="flex justify-between mb-5"> 
         <h1 className="text-2xl md:text-3xl text-black font-bold ">
@@ -103,7 +105,7 @@ const Admin_Project_page = () => {
                                 <li>
                                   <button
                                     className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-200"
-                                    onClick={() => handleProject(project)}
+                                    onClick={() => navigate('/adminhome/projetdetails/',{state:project})}
                                   >
                                     View
                                   </button>

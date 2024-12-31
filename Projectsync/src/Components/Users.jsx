@@ -15,7 +15,7 @@ const Users = () => {
 
   useEffect(()=>{
     
-    const filterUsers = Users.filter((user)=>{
+    const filterUsers = Users && Users.filter((user)=>{
         switch (activeTab){
             case "all":
                 return true

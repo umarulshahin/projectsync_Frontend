@@ -45,35 +45,7 @@ const useUser = () => {
     }
   };
 
-
-  
-
-
-  const AddNewMember = async (data) =>{
-    try{
-
-      const response = await UserAxios.put(AddNewMember_URL,data,{
-        headers:{
-          "Content-Type" : "application/json"
-        }
-      })
-
-      if(response.status === 200){
-
-        GetProjectTeam(null,data.project_id)
-        toast.success(response.data)
-      }
-    }catch(error){
-      console.error(error,"add new member error")
-      if(error.response?.status===401){
-        toast.error("Unauthorized access. Please log in again.")
-     }else{
-      toast.error("Something went wrong. Please try again.")
-     }
-
-    }
-  }
-  return { Get_User,AddNewMember };
+  return { Get_User };
 };
 
 export default useUser;

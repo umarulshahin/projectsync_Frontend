@@ -15,7 +15,7 @@ const Admin_Layout = () => {
         <Admin_Header />
         
         {/* Main Content Area */}
-        <main className="flex-1  mt-20 ">
+        <main className="flex-1  mt-20 bg-orange-200/80 ">
           <Outlet /> 
         </main>
       </div>

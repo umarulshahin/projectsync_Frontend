@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import useUser from '../Hooks/useUser';
 import { useSelector } from 'react-redux';
+import useBase from '../Hooks/useBase';
 
-const NewMember = ({ member,isOpen}) => {
+const NewMember = ({role = null, member,isOpen}) => {
   const [selectedMembers, setSelectedMembers] = useState([]);
-  const {Get_Employee,AddNewMember} = useUser()
+  const {Get_Employee,AddNewMember } = useBase()
   const employee = useSelector((state)=> state.userdata.employees)
   
 //   Format available employees for the select options
@@ -18,16 +18,14 @@ const NewMember = ({ member,isOpen}) => {
       
     }));
 
-
-
   useEffect(()=>{
-    Get_Employee()
+    Get_Employee(role)
   },[])
-
+  
   const handleAddMembers = () => {
         
          if(selectedMembers.length > 0){
-                AddNewMember({members:selectedMembers,project_id:member[0].project})
+                AddNewMember(role,{members:selectedMembers,project_id:member[0].project})
          }
          isOpen(false)
   };

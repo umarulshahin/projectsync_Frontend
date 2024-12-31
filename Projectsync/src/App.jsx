@@ -21,7 +21,7 @@ import User_Dashboard from "./Components/User_Dashboard.jsx";
 const Users = lazy(() => import("./Components/Users.jsx"))
 const ProjectDetailsPage = lazy(()=> import("./Components/ProjectDetailsPage.jsx"))
 const Admin_Project_page = lazy(()=>import("./Pages/Admin_Project_page.jsx"))
-
+const Admin_Project_Details = lazy(()=> import("./Pages/Admin_Project_Details.jsx"))
 
 function App() {
   return (
@@ -43,6 +43,8 @@ function App() {
                <Route index element={<Admin_Dashboard />}/>
                <Route path="/adminhome/user" element={<Suspense fallback={<Spinner />} ><Users /> </ Suspense>}/> 
                <Route path="/adminhome/project" element={<Suspense fallback={<Spinner />}><Admin_Project_page /></Suspense>} />
+               <Route path='/adminhome/projetdetails/' element={<Suspense fallback={<Spinner />} > <Admin_Project_Details /></Suspense> }/>
+
 
               </Route>
 
