@@ -76,7 +76,7 @@ const useBase = () => {
         try{
  
          const response = await BaseAxios.get(Get_Tasks_URL,{
-             
+             meta:{role},
              params:{id:data},
              headers:{
                  "Content-Type":"application/json"
@@ -107,8 +107,8 @@ const useBase = () => {
             })
             if(response.status === 201){
                 console.log(response.data,"add new task")
+                Get_Tasks(role,data.project_id)
                 toast.success(response.data)
-                Get_Tasks(null,data.project_id)
             }
         }catch(error){
 

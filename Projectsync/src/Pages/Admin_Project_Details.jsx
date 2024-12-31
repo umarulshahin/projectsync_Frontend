@@ -6,6 +6,7 @@ import useBase from "../Hooks/useBase";
 import Spinner from "../Components/spinner";
 import NewMember from "../Components/NewMember";
 import ModalManager from "../Modals/ModalManager";
+import Admin_Task_list from "../Components/Admin_Task_list";
 
 const Admin_Project_Details = () => {
   const location = useLocation();
@@ -33,6 +34,8 @@ const Admin_Project_Details = () => {
 
   const handleAddTask = (value) => {
     setOpenModal("add task");
+    value['role']='admin'
+    console.log(value,'value')
     setProjectdata(value);
   };
 
@@ -148,7 +151,7 @@ const Admin_Project_Details = () => {
               </button>
 
               <button
-                onClick={() => handleAddTask(project.id)}
+                onClick={() => handleAddTask({project_id:project.id})}
                 className=" bg-blue-500 rounded-lg py-2 px-4 my-5 font-semibold text-white hover:bg-blue-600"
               >
                 Add New Task
@@ -161,10 +164,10 @@ const Admin_Project_Details = () => {
               <NewMember role ={'admin'} member={projectTeam} isOpen={setOpenNewMember} />
             </div>
           )}
-          {/* <div className="min-w-7xl">
-            <TaskList project_id={project.id} />
+          <div className="min-w-7xl">
+            <Admin_Task_list project_id={project.id} />
   
-            </div> */}
+            </div>
           {openModal && (
             <ModalManager
               userdata={projectdata}

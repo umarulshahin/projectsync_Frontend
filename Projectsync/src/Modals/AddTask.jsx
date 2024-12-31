@@ -24,6 +24,9 @@ const validationSchema = Yup.object().shape({
 const AddTask = ({ projectdata, isModal, isOpen }) => {
   const Team = useSelector((state) => state.userdata.projectTeam);
   const {AddNewTask} = useBase()
+   
+  console.log(projectdata,'projectdata')
+  const role = projectdata && projectdata.role ? projectdata.role : null;
 
   if (!isOpen) return null;
 
@@ -36,9 +39,9 @@ const AddTask = ({ projectdata, isModal, isOpen }) => {
 
   const handleSubmit = (values, { setSubmitting }) => {
     console.log(projectdata)
-    values['project_id'] = projectdata
+    values['project_id'] = projectdata?.project_id
     console.log(values);
-    AddNewTask(null,values)
+    AddNewTask(role,values)
     setSubmitting(false);
     isModal(false);
   };

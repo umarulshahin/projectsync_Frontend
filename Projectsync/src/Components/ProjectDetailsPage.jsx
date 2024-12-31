@@ -148,7 +148,7 @@ const ProjectDetailsPage = () => {
                   </button>
 
                   <button
-                    onClick={() => handleAddTask(project.id)}
+                    onClick={() => handleAddTask({project_id:project.id})}
                     className=" bg-blue-500 rounded-lg py-2 px-4 my-5 font-semibold text-white hover:bg-blue-600"
                   >
                     Add New Task
