@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import useUser from "../Hooks/useUser";
-// import { PlusCircleIcon } from "@heroicons/react/solid";
 import ModalManager from "../Modals/ModalManager";
 import { PlusCircle, Eye, Trash, Pencil, RotateCw } from "lucide-react";
 import { Menu } from "@headlessui/react";
@@ -108,7 +107,7 @@ const User_Dashboard = () => {
                       {project.end_date}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                      {project.created_by.username}
+                      {project?.created_by?.username ? project.created_by.username: "Admin"  }
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span

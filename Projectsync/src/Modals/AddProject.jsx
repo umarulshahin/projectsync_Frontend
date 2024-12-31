@@ -9,6 +9,7 @@ import useUser from "../Hooks/useUser";
 import { format } from "date-fns";
 import { useSelector } from "react-redux";
 import Spinner from "../Components/spinner";
+import useBase from "../Hooks/useBase";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string()
@@ -28,11 +29,17 @@ const validationSchema = Yup.object().shape({
     .required("Team is required"),
 });
 
-const AddProject = ({ isModal, isOpen }) => {
+const AddProject = ({ projectdata, isModal, isOpen }) => {
   if (!isOpen) return null;
 
-  const { CreateProject, Get_Employee } = useUser();
+  const {  Get_Employee } = useBase();
+  const {CreateProject} = useBase()
   const employee = useSelector((state) => state.userdata.employees);
+
+  let role = null
+  if (projectdata?.role === 'admin'){
+   role = 'admin'
+  }
 
   const initialValues = {
     title: "",
@@ -50,15 +57,16 @@ const AddProject = ({ isModal, isOpen }) => {
       team: values.team.map((member) => parseInt(member.value)), 
     };
     
-    console.log(formattedValues)
-    CreateProject(formattedValues);
+    console.log(formattedValues,'formatted values');
+    CreateProject(role,formattedValues);
     setSubmitting(false);
     resetForm();
     isModal(null);
   };
 
   useEffect(() => {
-    Get_Employee();
+    
+    Get_Employee(role);
   }, []);
 
   const formatEmployeeOptions = () => {

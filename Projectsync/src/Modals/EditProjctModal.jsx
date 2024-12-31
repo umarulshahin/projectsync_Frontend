@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import useUser from "../Hooks/useUser";
+import useBase from "../Hooks/useBase";
 
 const EditProjectModal = ({ projectdata, isModal, isOpen }) => {
   if (!isOpen) return null;
 
   const [formData, setFormData] = useState(projectdata);
   const [errors, setErrors] = useState({});
-  const {EditProject} = useUser()
+  const {EditProject} = useBase()
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" })); // Clear errors for the field
+    setErrors((prev) => ({ ...prev, [name]: "" })); 
   };
 
   const validateForm = () => {
@@ -47,8 +47,14 @@ const EditProjectModal = ({ projectdata, isModal, isOpen }) => {
       return;
     }
 
+    let role = null
+
+    if(projectdata?.role === 'admin'){
+      role = projectdata?.role
+    }
+
     console.log("Updated Project Data:", formData);
-    EditProject(formData)
+    EditProject(role,formData)
     isModal(false); // Close the modal after successful validation
   };
 

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import useAdmin from "../Hooks/useAdmin";
 import { useSelector } from "react-redux";
 import ModalManager from "../Modals/ModalManager";
+import { PlusCircle } from "lucide-react";
+
 
 const Admin_Project_page = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(null);
@@ -9,8 +11,8 @@ const Admin_Project_page = () => {
   const [projectdata, setProjectdata] = useState(null);
   
   const projects = useSelector((state) => state.admindata.Project_list);
-  console.log(projects)
   const { Get_Projects } = useAdmin();
+  console.log(projects,'projects')
   
   useEffect(() => {
     Get_Projects();
@@ -26,9 +28,19 @@ const Admin_Project_page = () => {
   return (
     <div className="p-4 md:p-10 bg-orange-200/80 min-h-screen">
       <div className="flex flex-col">
-        <h1 className="text-2xl md:text-3xl text-black font-bold mb-5">
+        <div className="flex justify-between mb-5"> 
+        <h1 className="text-2xl md:text-3xl text-black font-bold ">
           Project Management
         </h1>
+         <button
+                   onClick={()=>handleProject(null, 'addproject')}
+                   className="py-3 px-4 flex items-center bg-orange-400 font-semibold rounded-lg text-white hover:bg-orange-500"
+                 >
+                   <PlusCircle className="pr-1 h-5 md:pr-2" /> Add New Project
+                 </button>
+        </div>
+       
+
         <div className="p-4 md:p-6 rounded-lg shadow-lg bg-white">
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white rounded-lg">
@@ -107,7 +119,7 @@ const Admin_Project_page = () => {
                                 <li>
                                   <button
                                     className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-200"
-                                    onClick={() => handleProject(project)}
+                                    onClick={() => handleProject(project, 'editproject')}
                                   >
                                     Edit
                                   </button>

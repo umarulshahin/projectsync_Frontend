@@ -1,15 +1,18 @@
 import React from 'react'
 import { toast } from 'sonner';
 import BaseAxios from '../Axios/BaseAxios';
-import { AddNewTask_URL, Delete_Tasl_URL, DeleteProject_URL, Edit_Task_URL, Get_Tasks_URL, GetProjectTeam_URL } from '../Utils/Constance';
+import { AddNewTask_URL, CreateProject_URL, Delete_Tasl_URL, DeleteProject_URL, Edit_Task_URL, EditProject_URL, Get_Tasks_URL, GetEmployee_URL, GetProjectTeam_URL } from '../Utils/Constance';
 import useUser from './useUser';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDeleteProject, addProjectTeam, addRemoveMember, addRemoveTask, addStatusManagement, addTasks } from '../Redux/UserSlice';
+import { addDeleteProject, addEmployees, addProjectTeam, addRemoveMember, addRemoveTask, addStatusManagement, addTasks } from '../Redux/UserSlice';
 import { addProjectStatus, addRemoveProjectList } from '../Redux/AdminSlice';
+import useAdmin from './useAdmin';
 
 const useBase = () => {
    const user = useSelector((status)=>status.userdata.userdata)
    const dispatch = useDispatch()
+   const {Get_Projects} = useAdmin()
+   const {Get_User} = useUser()
 
     const Delete_Project= async (role=null,data)=>{
       
@@ -79,8 +82,8 @@ const useBase = () => {
              }
          })
          if(response.status===200){
-             console.log(response.data,"get tasks")
-             dispatch(addTasks(response.data))
+
+            dispatch(addTasks(response.data))
          }
         }catch(error){
          console.error(error,"get tasks error")
@@ -96,6 +99,7 @@ const useBase = () => {
         try{
 
             const response = await BaseAxios.post(AddNewTask_URL,data,{
+                meta:{role},
                 headers:{
                     "Content-Type":"application/json"
                 }
@@ -216,7 +220,108 @@ const useBase = () => {
          }
         }
      }
-    return {Delete_Project,GetProjectTeam,AddNewTask,Get_Tasks,Delete_Task,EditTasks,UpdateProject}
+     const EditProject = async (role=null,data)=>{
+        try{
+           const response = await BaseAxios.patch(EditProject_URL,data,{
+            meta:{role},
+            headers:{
+              "Content-Type":"application/json"
+            }
+             
+           })
+           if(response.status ===200){
+            console.log(response.data,'edit project')
+
+            if(role === 'admin'){
+                Get_Projects()
+            }else{
+                Get_User(user.user_id)
+
+            }
+            toast.success(response.data)
+           }
+        }catch(error){
+          console.error(error,"edit project error")
+          if(error.response?.status===401){   
+            toast.error("Unauthorized access. Please log in again.")
+          }else{
+            toast.error("Something went wrong. Please try again.")
+          }
+        }
+      }
+      
+  const CreateProject = async (role=null,data) => {
+
+    const formdata = new FormData();
+    formdata.append("title", data["title"]);
+    formdata.append("description", data["description"]);
+    formdata.append("start_date", data["startDate"]);
+    formdata.append("end_date", data["endDate"]);
+    data["team"].forEach((member) => {
+       console.log(member,"member");
+      formdata.append("team[]", member);
+    });
+
+    try {
+      const response = await BaseAxios.post(CreateProject_URL, formdata, {
+        meta:{role},
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (response.status === 201) {
+
+        if(role==='admin'){
+          Get_Projects()
+        }else{
+            Get_User(user.user_id)
+
+        }
+        toast.success(response.data[0]);
+        
+      }
+    } catch (error) {
+      console.error(error, "create project error");
+      if (error.response?.status === 401) {
+        toast.error("Unauthorized access. Please log in again.");
+      } else if (error.response?.status === 400) {
+        toast.error("Invalid data submitted. Please check your input.");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    }
+
+    dispatch(addEmployees(null));
+  };
+
+  
+  const Get_Employee = async (role=null) => {
+    try {
+      const response = await BaseAxios.get(GetEmployee_URL, {
+        meta:{role},
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status === 200) {
+        console.log(response.data, "get employees");
+
+        dispatch(addEmployees(response.data));
+       
+      
+
+      }
+    } catch (error) {
+      console.error(error, "get employee error");
+      if (error.response?.status === 401) {
+        toast.error("Unauthorized access. Please log in again.");
+      } else {
+        toast.error("Something went wrong. Please log in again.");
+      }
+    }
+  };
+
+    return {Delete_Project,GetProjectTeam,AddNewTask,Get_Tasks,Delete_Task,EditTasks,UpdateProject,EditProject,CreateProject,Get_Employee}
 
 }
 

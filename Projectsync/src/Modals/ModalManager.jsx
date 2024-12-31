@@ -21,7 +21,7 @@ const ModalManager = ({userdata,modaltype,isModal}) => {
         return (< PermissionModal userdata={userdata} isModal={isModal} isOpen={modaltype === 'permission'} />)
 
     case 'addproject':
-        return ( <AddProject isModal={isModal} isOpen={modaltype === 'addproject'} />)
+        return ( <AddProject projectdata={userdata} isModal={isModal} isOpen={modaltype === 'addproject'} />)
 
     case 'deleteproject':
         return (<DeleteProject projectdata={userdata} isModal={isModal} isOpen={modaltype === 'deleteproject'} />)
