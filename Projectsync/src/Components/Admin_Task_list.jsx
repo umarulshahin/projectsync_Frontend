@@ -177,7 +177,7 @@ const Admin_Task_list = ({ project_id }) => {
                   <td className="px-6 py-4 text-sm text-gray-700 border-b max-w-[200px] truncate">
                   {task.description}</td>
                   <td className="px-6 py-4 text-sm text-gray-700 border-b">{task.created_at}</td>
-                  <td className="px-6 py-4 text-sm text-gray-700 border-b">{task.created_by.username}</td>
+                  <td className="px-6 py-4 text-sm text-gray-700 border-b">{task?.created_by?.username || 'Admin'}</td>
                   <td className="px-6 py-4 text-sm text-gray-700 border-b">{task.assigned_to.username}</td>
                   <td className="px-6 py-1 text-sm text-gray-500 border-b">
                     <span
@@ -238,7 +238,7 @@ const Admin_Task_list = ({ project_id }) => {
                                 <button
                                   onClick={() =>
                                     handleAction(
-                                      { task, project_id, time: new Date().toISOString() },
+                                      { task, project_id: project_id,role:'admin' },
                                       "Task_Edit"
                                     )
                                   }

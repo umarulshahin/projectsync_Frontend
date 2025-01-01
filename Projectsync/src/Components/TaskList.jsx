@@ -147,7 +147,7 @@ const TaskList = ({ project_id }) => {
                     {task.created_at}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500 border-b">
-                    {task.created_by.username}
+                    {task?.created_by?.username || 'Admin'}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500 border-b">
                     {task.assigned_to.username}

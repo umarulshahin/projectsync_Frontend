@@ -167,14 +167,8 @@ const useBase = () => {
                 }
             })
             if(response.status === 200){
-
-                console.log(response.data,'edit task')
-                if(role === 'admin'){
-                   console.log('yes admin')
-                }else{
-                    Get_Tasks(null,data.project_id)
-
-                }
+                
+                Get_Tasks(role,data.project_id)
                 toast.success(response.data)
             }
         }catch(error){

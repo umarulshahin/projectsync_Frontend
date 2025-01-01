@@ -21,13 +21,17 @@ const EditTask = ({ Task_data, isModal, isOpen }) => {
 
   const employee = useSelector((state) => state.userdata.projectTeam);
   const userdata = useSelector((state) => state.userdata.userDetails);
+  const admindata = useSelector((state)=> state.admindata.admindata)
   const { project_id } = Task_data;
-  const Taskdata = Task_data.task;
+  const Taskdata = Task_data?.task;
   console.log(Task_data ,'task data');
   
   const employees = employee && Array.isArray(employee) && employee.length > 0 ? employee.map((emp) => emp.employee) : [];
 
   const { EditTasks } = useBase();
+  const role = Task_data?.role || null
+
+  console.log(role,'role')
 
   console.log(Taskdata,'task data');
   // Helper function to move the current value to the top
@@ -65,7 +69,7 @@ const EditTask = ({ Task_data, isModal, isOpen }) => {
             values["project_id"] = project_id;
             console.log("Updated Task:", values);
 
-            EditTasks(null, values);
+            EditTasks(role, values);
             isModal(null);
           }}
         >
@@ -79,7 +83,7 @@ const EditTask = ({ Task_data, isModal, isOpen }) => {
                   Title
                 </label>
                 <Field
-                  disabled={userdata.is_permission === false ? true : false}
+                  disabled={userdata?.is_permission === false ? true : false}
                   type="text"
                   name="title"
                   className="mt-1 py-2 block w-full rounded-md border-stone-300 shadow-sm focus:border-stone-400 focus:ring-stone-400"
@@ -99,7 +103,7 @@ const EditTask = ({ Task_data, isModal, isOpen }) => {
                   Description
                 </label>
                 <Field
-                  disabled={userdata.is_permission === false ? true : false}
+                  disabled={userdata?.is_permission === false ? true : false}
                   as="textarea"
                   name="description"
                   rows={3}
@@ -120,7 +124,7 @@ const EditTask = ({ Task_data, isModal, isOpen }) => {
                   Assigned To
                 </label>
                 <Field
-                  disabled={userdata.is_permission === false ? true : false}
+                  disabled={userdata?.is_permission === false ? true : false}
                   as="select"
                   name="assignedTo"
                   className="mt-1 py-2 block w-full rounded-md border-stone-300 shadow-sm focus:border-stone-400 focus:ring-stone-400"
@@ -177,7 +181,7 @@ const EditTask = ({ Task_data, isModal, isOpen }) => {
                   Priority
                 </label>
                 <Field
-                  disabled={userdata.is_permission === false ? true : false}
+                  disabled={userdata?.is_permission === false ? true : false}
                   as="select"
                   name="priority"
                   className="mt-1 py-2 block w-full rounded-md border-stone-300 shadow-sm focus:border-stone-400 focus:ring-stone-400"
@@ -198,7 +202,7 @@ const EditTask = ({ Task_data, isModal, isOpen }) => {
                 /> 
               </div>
               <div className="w-full flex justify-center">
-              {userdata.is_permission === false && (
+              {userdata?.is_permission === false && (
                 <span className="text-sm text-gray-500 text-center">You only have permission to edit the task status.</span>
               )}
               </div>
