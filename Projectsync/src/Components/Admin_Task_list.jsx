@@ -67,18 +67,9 @@ const Admin_Task_list = ({ project_id }) => {
     }
   };
 
-  const handleBulkUpdate = (status) => {
-    // Bulk_Update_Tasks(selectedTasks, status);
-    // setSelectedTasks([]);
-
-    console.log(selectedTasks,'selected tasks')
-    console.log(status,'status')
-  };
-
   const handleBulkDelete = () => {
-    console.log(selectedTasks,'selected tasks')
-    handleAction(selectedTasks,"Bulk_Delete")
 
+    handleAction(selectedTasks,"Bulk_Delete")
 
   };
 
@@ -111,26 +102,6 @@ const Admin_Task_list = ({ project_id }) => {
               {selectedTasks.length} {selectedTasks.length === 1 ? 'task' : 'tasks'} selected
             </span>
             <div className="flex gap-2">
-              <button
-                onClick={() => handleBulkUpdate("in-progress")}
-                className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-blue-700 bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                data-tooltip-id="inProgressTooltip"
-              >
-                <PlayCircle className="w-4 h-4 mr-2" />
-                Start
-              </button>
-              <Tooltip id="inProgressTooltip" content="Mark as In-Progress" />
-
-              <button
-                onClick={() => handleBulkUpdate("done")}
-                className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-green-700 bg-green-50 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
-                data-tooltip-id="doneTooltip"
-              >
-                <CheckCircle className="w-4 h-4 mr-2" />
-                Complete
-              </button>
-              <Tooltip id="doneTooltip" content="Mark as Done" />
-
               <button
                 onClick={handleBulkDelete}
                 className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-red-700 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500"
@@ -241,6 +212,7 @@ const Admin_Task_list = ({ project_id }) => {
                                 </button>
                               )}
                             </Menu.Item>
+                            
                             <Menu.Item>
                               {({ active }) => (
                                 <button
