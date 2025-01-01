@@ -56,6 +56,11 @@ const UserSlice = createSlice({
 
           state.tasks = state.tasks.filter((task)=> task.id !== id)
     },
+    addBulk_RemoveTask:(state,action)=>{
+        const ids = action.payload
+
+        state.tasks = state.tasks.filter((task)=> !ids.includes(task.id))
+    },
     addLogout: (state, action) => {
       state.userdata = null;
       state.userDetails = null;
@@ -77,7 +82,8 @@ export const {
   addProjectTeam,
   addRemoveMember,
   addTasks,
-  addRemoveTask
+  addRemoveTask,
+  addBulk_RemoveTask,
 } = UserSlice.actions;
 
 export default UserSlice.reducer;

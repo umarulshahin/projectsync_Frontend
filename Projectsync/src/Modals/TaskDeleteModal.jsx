@@ -1,6 +1,7 @@
 import React from 'react'
 import { XMarkIcon,TrashIcon  } from '@heroicons/react/24/outline';
 import useBase from '../Hooks/useBase';
+import { Delete_Tasl_URL } from '../Utils/Constance';
 
 const TaskDeleteModal = ({Taskdata, isModal, isOpen }) => {
 
@@ -10,8 +11,7 @@ const TaskDeleteModal = ({Taskdata, isModal, isOpen }) => {
 
     const handleConfirm = () => {
       
-        console.log(Taskdata.id)
-        Delete_Task(null,Taskdata.id)
+        Delete_Task(Delete_Tasl_URL,null,Taskdata.id)
         isModal(false);
     };
   

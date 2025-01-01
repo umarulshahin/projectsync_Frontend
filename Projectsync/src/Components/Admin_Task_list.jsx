@@ -10,7 +10,7 @@ import { PlayCircle, CheckCircle, Trash2 } from 'lucide-react';
 
 const Admin_Task_list = ({ project_id }) => {
   const tasks = useSelector((state) => state.userdata.tasks);
-  const { Get_Tasks, Bulk_Update_Tasks, Bulk_Delete_Tasks } = useBase();
+  const { Get_Tasks } = useBase();
   const [activeTab, setActiveTab] = useState("all");
   const [Tasks, setTasks] = useState(null);
   const [Taskdata, setTaskdata] = useState(null);
@@ -20,6 +20,9 @@ const Admin_Task_list = ({ project_id }) => {
   useEffect(() => {
     if (project_id) {
       Get_Tasks('admin', project_id);
+    }
+    return ()=>{
+        setSelectedTasks([])
     }
   }, [project_id]);
 
@@ -65,13 +68,18 @@ const Admin_Task_list = ({ project_id }) => {
   };
 
   const handleBulkUpdate = (status) => {
-    Bulk_Update_Tasks(selectedTasks, status);
-    setSelectedTasks([]);
+    // Bulk_Update_Tasks(selectedTasks, status);
+    // setSelectedTasks([]);
+
+    console.log(selectedTasks,'selected tasks')
+    console.log(status,'status')
   };
 
   const handleBulkDelete = () => {
-    Bulk_Delete_Tasks(selectedTasks);
-    setSelectedTasks([]);
+    console.log(selectedTasks,'selected tasks')
+    handleAction(selectedTasks,"Bulk_Delete")
+
+
   };
 
   return (

@@ -4,7 +4,7 @@ import BaseAxios from '../Axios/BaseAxios';
 import { AddNewMember_URL, AddNewTask_URL, CreateProject_URL, Delete_Tasl_URL, DeleteProject_URL, Edit_Task_URL, EditProject_URL, Get_Tasks_URL, GetEmployee_URL, GetProjectTeam_URL } from '../Utils/Constance';
 import useUser from './useUser';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDeleteProject, addEmployees, addProjectTeam, addRemoveMember, addRemoveTask, addStatusManagement, addTasks } from '../Redux/UserSlice';
+import { addBulk_RemoveTask, addDeleteProject, addEmployees, addProjectTeam, addRemoveMember, addRemoveTask, addStatusManagement, addTasks } from '../Redux/UserSlice';
 import { addProjectStatus, addRemoveProjectList } from '../Redux/AdminSlice';
 import useAdmin from './useAdmin';
 
@@ -121,11 +121,11 @@ const useBase = () => {
         }
     }
 
-    const Delete_Task = async (role=null,data)=>{
+    const Delete_Task = async (url,role=null,data)=>{
 
         try{
 
-            const response = await BaseAxios.delete(Delete_Tasl_URL,{
+            const response = await BaseAxios.delete(url,{
                 meta:{role},
                 data:{id:data},
                 header:{
@@ -133,11 +133,11 @@ const useBase = () => {
                 }
             })
             if(response.status === 200){
-                console.log(response.data,'delete task')
+                
 
                 if(role === 'admin'){
-                    console.log('yes admin')
-                  
+                    console.log(response.data,'yes admin')
+                    dispatch(addBulk_RemoveTask(data))
                 }else{
                     dispatch(addRemoveTask(data)) 
 
