@@ -14,7 +14,6 @@ const TaskList = ({ project_id }) => {
   const [Taskdata, setTaskdata] = useState(null);
   const [isModal, setisModal] = useState(null);
 
-  console.log(tasks,'tasks')
 
   useEffect(() => {
     if (project_id) {

@@ -109,7 +109,7 @@ const TaskDetails = ({ Task_data, isOpen, isModal }) => {
                                     Created by
                                 </h3>
                                 <p className="text-gray-900 pl-3 font-medium flex items-center gap-2">
-                                    {Task_data?.created_by?.username || 'N/A'}
+                                    {Task_data?.created_by?.username || 'Admin'}
                                 </p>
                             </div>
                         </div>
