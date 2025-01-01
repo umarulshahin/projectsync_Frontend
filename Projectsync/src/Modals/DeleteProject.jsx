@@ -1,6 +1,8 @@
 import React from "react";
-import { TrashIcon } from "@heroicons/react/24/outline";
+// import { TrashIcon } from "@heroicons/react/24/outline";
 import useBase from "../Hooks/useBase";
+import { XMarkIcon,TrashIcon  } from '@heroicons/react/24/outline';
+
 
 const DeleteProject = ({ projectdata, isModal, isOpen,  }) => {
   if (!isOpen) return null;
@@ -22,10 +24,10 @@ const DeleteProject = ({ projectdata, isModal, isOpen,  }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-80">
+      <div className="bg-white rounded-lg shadow-lg p-6 ">
         {/* Icon and Header */}
         <div className="flex flex-col items-center">
-          <TrashIcon className="h-12 w-12 text-red-500" />
+                <TrashIcon  className="h-6 w-6 text-red-600" />
           <h2 className="text-lg font-semibold text-gray-800 mt-4">
             Delete Project
           </h2>
@@ -46,7 +48,7 @@ const DeleteProject = ({ projectdata, isModal, isOpen,  }) => {
           </button>
           <button
             onClick={()=>handleConfirm()}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
           >
             Confirm
           </button>
